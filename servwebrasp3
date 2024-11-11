@@ -32,6 +32,10 @@ sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
 echo "Asignando permisos a la carpeta www..."
 sudo chmod -R 755 /var/www/html/
 
+# Mejorar la conexión al servidor de paquetes y permitir que la instalación se complete sin errores.
+echo "Mejorando la conexión al servidor de paquetes y permitir que la instalación se complete sin errores."
+sudo apt-get update && sudo apt-get install --fix-missing -y && sudo sed -i 's|http://ftp.cica.es/mirrors/Linux/raspbian/raspbian/|http://raspbian.raspberrypi.org/raspbian/|g' /etc/apt/sources.list && sudo apt-get update
+
 # Mensaje de finalización
 echo "Instalación completa. Puedes acceder a phpMyAdmin en http://tu_ip/phpmyadmin"
 echo "Recuerda configurar MySQL y phpMyAdmin con contraseñas seguras."
