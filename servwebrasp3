@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Actualización de paquetes
+echo "Actualizando paquetes..."
+sudo apt-get update && sudo apt-get upgrade -y
+
+# Instalación de Apache
+echo "Instalando Apache..."
+sudo apt-get install apache2 -y
+
+# Instalación de PHP (reemplazar php5 por php7.4 o php8.0 según preferencia)
+echo "Instalando PHP..."
+sudo apt-get install php7.4 libapache2-mod-php7.4 -y
+
+# Instalación de MySQL
+echo "Instalando MySQL..."
+sudo apt-get install mysql-server mysql-client php7.4-mysql -y
+
+# Reiniciar Apache para aplicar cambios
+echo "Reiniciando Apache..."
+sudo systemctl restart apache2
+
+# Instalación de phpMyAdmin
+echo "Instalando phpMyAdmin..."
+sudo apt-get install phpmyadmin -y
+
+# Enlace simbólico para phpMyAdmin en Apache
+echo "Creando enlace simbólico para phpMyAdmin..."
+sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
+
+# Permisos para la carpeta www
+echo "Asignando permisos a la carpeta www..."
+sudo chmod -R 755 /var/www/html/
+
+# Mensaje de finalización
+echo "Instalación completa. Puedes acceder a phpMyAdmin en http://tu_ip/phpmyadmin"
+echo "Recuerda configurar MySQL y phpMyAdmin con contraseñas seguras."
